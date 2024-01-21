@@ -1,0 +1,99 @@
+<!-- yourapp/templates/yourapp/home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .home-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+            text-align: left;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="home-container">
+        <h2>Home</h2>
+        
+        {% if success_message %}
+            <div style="color: green; margin-bottom: 10px;">{{ success_message }}</div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="id_email">Email:</label>
+            <input type="email" name="email" id="id_email" required>
+            
+            <label>Choose Option:</label>
+            <input type="radio" name="option" value="option1" id="id_option1" checked>
+            <label for="id_option1">Option 1</label>
+            
+            <input type="radio" name="option" value="option2" id="id_option2">
+            <label for="id_option2">Option 2</label>
+
+            <button type="submit">Generate CSV</button>
+        </form>
+        <br>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</body>
+</html>
